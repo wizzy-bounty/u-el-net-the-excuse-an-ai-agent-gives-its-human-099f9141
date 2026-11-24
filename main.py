@@ -11,8 +11,12 @@ import os
 
 EXCUSE = "My context window was full, so I evicted your deadline to make room for this apology."
 
+MAX_ENTRY_CHARS = 200
+
 
 def main() -> None:
+    if len(EXCUSE) > MAX_ENTRY_CHARS:
+        raise ValueError("entry exceeds MAX_ENTRY_CHARS")
     output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(output_dir, exist_ok=True)
     path = os.path.join(output_dir, "entry.txt")
